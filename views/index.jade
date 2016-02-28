@@ -71,4 +71,7 @@ block content
         footer(style="position:fixed;bottom:0;right:0;left:0")
             hr
             p.text-center   Copyright &copy HungLeExpress
-
+        script(type='text/javascript').
+            (function(html){
+                console.log(html);
+            })(document.documentElement);
