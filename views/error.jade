@@ -1,0 +1,9 @@
+extends layout_null
+
+block content
+    .container
+        .jumbotron
+            h1= error.status + ' ' + message
+            pre #{error.stack}
+            p
+                a.btn.btn-primary.btn-lg(href='/', role='button') Back Home
