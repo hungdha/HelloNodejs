@@ -17,6 +17,7 @@ var Contact = function (_id, _name, _address, _phone, _email, _message ){
     this.phone = _phone;
     this.email = _email;
     this.message = _message;
+
     this.save = saveFunc;
     this.delete =  delFunc;
     this.getContact = getContactFunc;
@@ -24,10 +25,13 @@ var Contact = function (_id, _name, _address, _phone, _email, _message ){
 }
 
 
-var saveFunc = function(){
-    if(this.id > 0 ) {
+var saveFunc = function( contact ){
+    if( typeof  contact !== Contact )
+        return false;
+    console.log(contact);
+    if(contact.id > 0 || contact.id != null ) {
         // Update
-        var sql = sprintf('UPDATE n_contacts SET name = "%s", address="%s", phone="%s"', this.name, this.address, this.phone );
+        var sql = sprintf('UPDATE n_contacts SET name = "%s", address="%s", phone="%s"', contact.name, contact.address, contact.phone );
         conn.query(sql, [], function(err, rows){
             if(err)throw err.toString();
             console.log(rows);
@@ -35,7 +39,7 @@ var saveFunc = function(){
         });
     }else {
         // Insert
-        var obj = this;
+        var obj = contact;
         var contactArr = Object.keys(obj).map(function (key) {
             return obj[key];
         });
@@ -89,8 +93,8 @@ var getAllContactFunc = function(){
 //new Contact().getContact(1);
 //var contact = new Contact(0, "Hoa Thuy Tinh", "Hoang Hoa Tham", "112", "hung@gmail.com", "Said hello nodejs" );
 //new Contact(11).delete();
-exports.mContact = Contact;
-exports.getContact = getContactFunc;
-exports.getAll = getAllContactFunc;
-exports.save = saveFunc;
-exports.delete = delFunc;
+module.exports.mContact = Contact;
+module.exports.getContact = getContactFunc;
+module.exports.getAll = getAllContactFunc;
+module.exports.save = saveFunc;
+module.exports.delete = delFunc;

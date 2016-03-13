@@ -68,6 +68,7 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
+/*
 var mysql = require('mysql');
 
 var HOST = 'localhost';
@@ -84,7 +85,7 @@ var connection = mysql.createConnection({
     database : DATABASE
 });
 connection.connect();
-
+*/
 // select all
 /*
 connection.query('SELECT * FROM n_contacts', function(err, rows, fields) {
@@ -111,11 +112,14 @@ connection.query('UPDATE n_contacts SET ?, ? WHERE ?', [{ name: 'Hung Kieu' },{a
 */
 
 // delete
+/*
 connection.query('DELETE FROM n_contacts WHERE id=?', [10], function(err, res ){
     if(err) throw err.toString();
     console.log(res.affectedRows);
 });
 
+
 connection.end();
+ */
 
 

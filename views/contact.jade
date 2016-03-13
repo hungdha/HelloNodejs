@@ -65,16 +65,29 @@ block content
                 .form-group
                     label.col-sm-2.control-label(for='name') Name
                     .col-sm-10
-                        input#name.form-control(type='text', placeholder='Name', name="name" )
+                        input#name.form-control(type='text', placeholder='Name', name="name", value=body.name )
                 .form-group
                     label.col-sm-2.control-label(for='email') Email
                     .col-sm-10
-                        input#email.form-control(type='email', placeholder='Email', name="email" )
+                        input#email.form-control(type='text', placeholder='Email', name="email" value=body.email  )
+                .form-group
+                    label.col-sm-2.control-label(for='phone') Phone
+                    .col-sm-10
+                        input#phone.form-control(type='text', placeholder='Phone', name="phone" value=body.phone )
+                .form-group
+                    label.col-sm-2.control-label(for='address') Address
+                    .col-sm-10
+                        input#address.form-control(type='text', placeholder='Adress', name="address" value=body.address )
                 .form-group
                     label.col-sm-2.control-label(for='message') Content
                     .col-sm-10
-                        textarea#message.form-control(placeholder='Message',rows= 10, name="message" )
+                        textarea#message.form-control(placeholder='Message',rows= 10, name="message")=body.message
                 .form-group
                     .col-sm-offset-2.col-sm-10
                         button.btn.btn-primary(type='submit') Send a contact
+                        // hien thi cac loi tai day.
+                        //if msgErrors !== undefined
+                        ul(style = "color:red")
+                            each val in msgErrors
+                                li= val
 
