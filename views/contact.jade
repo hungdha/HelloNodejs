@@ -1,6 +1,6 @@
 extends layout
 block content
-    div.page-wrapper
+    div.page-wrapper(ng-app="myApp")
         nav.navbar.navbar-inverse.navbar-fixed-top
             .container
                 // Brand and toggle get grouped for better mobile display
@@ -40,7 +40,7 @@ block content
                                 li.divider(role='separator')
                                 li
                                     a(href='#') One more separated link
-                    form.navbar-form.navbar-left(role='search')
+                    form.navbar-form.navbar-left(role='search' )
                         .form-group
                             input.form-control(type='text', placeholder='Search')
                     ul.nav.navbar-nav.navbar-right
@@ -60,34 +60,49 @@ block content
                                 li.divider(role='separator')
                                 li
                                     a(href='#') Separated link
+
         .container
-            form.form-horizontal(action='/contact', method='POST')
-                .form-group
+            h2 Contact Us
+        hr
+        .container
+            form.form-horizontal(action='/contact', method='POST', ng-controller="ContactController", name="userForm", ng-submit="submitForm()")
+
+                div(ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine  }").form-group
                     label.col-sm-2.control-label(for='name') Name
                     .col-sm-10
-                        input#name.form-control(type='text', placeholder='Name', name="name", value=body.name )
-                .form-group
+                        input#name.form-control(type='text', placeholder='Name', name="name", value=body.name, ng-model="name" )
+                        |<span>{{userForm.name.$touched && userForm.name.$invalid }}</span>
+
+                div(ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }").form-group
                     label.col-sm-2.control-label(for='email') Email
                     .col-sm-10
-                        input#email.form-control(type='text', placeholder='Email', name="email" value=body.email  )
-                .form-group
+                        input#email.form-control(type='text', placeholder='Email', name="email" value=body.email, ng-model="contact.email" )
+                        p( ng-show="userForm.email.$invalid && !userForm.email.$pristine", class="help-block")
+                            |Your email is required
+
+                div(ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }").form-group
                     label.col-sm-2.control-label(for='phone') Phone
                     .col-sm-10
-                        input#phone.form-control(type='text', placeholder='Phone', name="phone" value=body.phone )
-                .form-group
+                        input#phone.form-control(type='text', placeholder='Phone', name="phone" value=body.phone, ng-model="contact.phone" )
+                        |<p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine " class="help-block">Your phone is required.</p>
+
+                div(ng-class="{ 'has-error' : userForm.address.$invalid && !userForm.address.$pristine }").form-group
                     label.col-sm-2.control-label(for='address') Address
                     .col-sm-10
-                        input#address.form-control(type='text', placeholder='Adress', name="address" value=body.address )
-                .form-group
+                        input#address.form-control(type='text', placeholder='Address', name="address" value=body.address, ng-model="contact.address" )
+                        |<p ng-show="userForm.address.$invalid" class="help-block">Your address is required.</p>
+                div(ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.address.$pristine }").form-group
                     label.col-sm-2.control-label(for='message') Content
                     .col-sm-10
-                        textarea#message.form-control(placeholder='Message',rows= 10, name="message")=body.message
-                .form-group
+                        textarea#message.form-control(placeholder='Message',rows= 10, name="message", )=body.message
+
+                div.form-group
                     .col-sm-offset-2.col-sm-10
-                        button.btn.btn-primary(type='submit') Send a contact
+                        button.btn.btn-primary(type='submit', ) Send a contact
                         // hien thi cac loi tai day.
                         //if msgErrors !== undefined
                         ul(style = "color:red")
                             each val in msgErrors
                                 li= val
-
+        footer(id="footer")
+            p(class="copyright-text")   Copyright &copy HungLeExpress

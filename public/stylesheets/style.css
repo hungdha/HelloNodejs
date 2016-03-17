@@ -7,7 +7,19 @@ a {
   color: #00B7FF;
 }
 .page-wrapper{
-  min-height: 100%;
-  position: relative;
-  padding-bottom: 130px;
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 130px;
+}
+#footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height:300px;
+    background:#222;
+    border-top:#080808;
+}
+.copyright-text{
+    text-align: center;
+    color:#FFFFFF;
 }
