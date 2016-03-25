@@ -1,0 +1,41 @@
+extends ../layout
+block content
+    .container
+        h2 Edit User
+        if( locals.message != null)
+            p #{locals.message.info}
+    hr
+    .container
+        form.form-horizontal(action='', method='POST',  name="userForm")
+            div.form-group
+                label.col-sm-2.control-label(for='username') Username:
+                .col-sm-10
+                    input#username.form-control(type='text', placeholder='Username', name="username" , value="#{user.username}")                     
+            div.form-group
+                label.col-sm-2.control-label(for='email') Email:
+                .col-sm-10
+                    input#email.form-control(type='text', placeholder='Email', name="email", value="#{user.email}" ) 
+            div.form-group
+                label.col-sm-2.control-label(for='first_name') First Name:
+                .col-sm-10
+                    input#first_name.form-control(type='text', placeholder='First name', name="first_name", value="#{user.first_name}"  ) 
+            div.form-group
+                label.col-sm-2.control-label(for='last_name') Last Name:
+                .col-sm-10
+                    input#last_name.form-control(type='text', placeholder='Last name', name="last_name", value="#{user.last_name}"  ) 
+
+            div.form-group
+                label.col-sm-2.control-label(for='password') Password:
+                .col-sm-10
+                    input#password.form-control(type='password', placeholder='Password', name="password", value="#{user.password}"  )                      
+            div.form-group
+                label.col-sm-2.control-label(for='password') Re-Password:
+                .col-sm-10
+                    input#re-password.form-control(type='password', placeholder='Re Password', name="re-password" ,  value="#{user.password}"   ) 
+            div.form-group
+                label.col-sm-2.control-label(for='level') Level:
+                .col-sm-10
+                    input#level.form-control(type='text', name="level", value="#{user.level == 1 ? 'User' : 'Admin' }" , disabled )                                
+            div.form-group
+                .col-sm-offset-2.col-sm-10
+                    button.btn.btn-primary(type='submit', ) Register        

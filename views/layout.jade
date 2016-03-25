@@ -2,16 +2,86 @@ doctype html
 html
     head
         title= title
-        link( href="stylesheets/bootstrap.min.css", rel="stylesheet" )
-        //link( href="stylesheets/clean-blog.min.css", rel="stylesheet" )
+        link( href="http://localhost:3000/stylesheets/bootstrap.min.css", rel="stylesheet" )        
         link( href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", rel="stylesheet" type="text/css")
         link( href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic', rel='stylesheet', type='text/css')
         link( href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800', rel='stylesheet', type='text/css')
-        link( rel='stylesheet', href='/stylesheets/style.css')
+        link( rel='stylesheet', href='http://localhost:3000/stylesheets/style.css')
     body
-        block content
+        div.page-wrapper        
+            nav.navbar.navbar-inverse.navbar-fixed-top
+                .container
+                    // Brand and toggle get grouped for better mobile display
+                    .navbar-header
+                        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+                            span.sr-only Toggle navigation
+                            span.icon-bar
+                            span.icon-bar
+                            span.icon-bar
+                        a.navbar-brand(href='/')
+                            b Hello Nodejs
+                    // Collect the nav links, forms, and other content for toggling
+                    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                        ul.nav.navbar-nav
+                            li.active
+                                a(href='/')
+                                    | Home
+                                    span.sr-only (current)
+                            li
+                                a(href='/about') About
+                            li
+                                a(href='/contact') Contact
+                            li.dropdown
+                                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                    | Dropdown
+                                    span.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href='#') #{locals.settings.about}
+                                    li
+                                        a(href='#') Another action
+                                    li
+                                        a(href='#') Something else here
+                                    li.divider(role='separator')
+                                    li
+                                        a(href='#') Separated link
+                                    li.divider(role='separator')
+                                    li
+                                        a(href='#') One more separated link
+                        form.navbar-form.navbar-left(role='search')
+                            .form-group
+                                input.form-control(type='text', placeholder='Search')                                                
+                        -if(locals.user  != null ){  
+                            ul.nav.navbar-nav.navbar-right 
+                                li                                                         
+                                    a Hello, #{locals.user.username}                                
+                                li.dropdown
+                                    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                        | Profile
+                                        span.caret
+                                    ul.dropdown-menu
+                                        li
+                                            a(href='#') Change password
+                                        li
+                                            a(href='../user/edit') Edit profile
+                                        li
+                                            a(href='#') Settings
+                                        li.divider(role='separator')                                        
+                                        li                                        
+                                            a(href='../user/logout') Logout 
+                        -}else{
+                            ul.nav.navbar-nav.navbar-right 
+                                li
+                                    button.btn.btn-default.navbar-btn(onclick="window.location.href='../user/login'", type='button') Sign In
+                                li
+                                    button.btn.btn-default.navbar-btn(onclick="window.location.href='../user/register'", type='button') Sign Up    
+                        -}                    
+            block content               
+            footer(style="position:fixed;bottom:0;right:0;left:0")
+                hr
+                p.text-center   Copyright &copy HungLeExpress                
         block javascript
-            script(src="javascripts/jquery.min.js")
-            script(src="javascripts/bootstrap.min.js")
-            script(src="javascripts/angular.min.js")
-            script(src="javascripts/myangular.js")
+            script(src="http://localhost:3000//javascripts/jquery.min.js")
+            script(src="http://localhost:3000/javascripts/bootstrap.min.js")
+            script(src="http://localhost:3000/javascripts/angular.min.js")
+            script(src="http://localhost:3000/javascripts/myangular.js")

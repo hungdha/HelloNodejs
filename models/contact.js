@@ -5,7 +5,7 @@ var mysql = require("mysql");
 var printf = require('sprintf');
 var sprintf = printf.sprintf;
 var vsprintf = printf.vsprintf;
-var conn = require("./database");
+var conn = require("../lib/database");
 
 
 

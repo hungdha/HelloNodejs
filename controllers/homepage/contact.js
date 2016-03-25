@@ -1,40 +1,16 @@
 var express = require("express");
 var router = express.Router();
-var conn = require("../database");
-var contactModel = require("../contact");
+var conn = require("../../lib/database");
+var contactModel = require("../../models/contact");
 var sprintf = require("sprintf").sprintf;
 var vsprintf =  require("sprintf").vsprintf;
 
 
 router.get("/", function (req, res, next) {
-       //var a = new model1.mContact(10, "Jhon Marken","Gio linh","90011","tuanhung@gmail.com","Hello Nodejs");
-    //console.log(a.save());
-    //console.log(contact.getAll());
-    //console.log(contact.getContact(1));
-    // var id = req.params.id;
-    //var cate = req.params.cate;
-
-    /*console.log("------------");
-     console.log(id);
-     console.log(cate);
-     console.log("Program 1");
-     var contact  = contactModel.getContact(id);
-     console.log(contact);
-     console.log("Program 2");*/
-
-    res.render("contact", {title: "Contact", msgErrors:"", body:"" });
-    //next();
+    res.locals.user =  req.session.user || null; 
+    res.render("contact", {title: "Contact", msgErrors:"", body:"" });    
 });
-/*
-router.get("/:id", function (req, res, next) {
-    //var a = new model1.mContact(10, "Jhon Marken","Gio linh","90011","tuanhung@gmail.com","Hello Nodejs");
-    console.log( req.params.id);
-    //console.log(contact.getAll());
-    //console.log(contact.getContact(1));
-    res.render("contact", {title: "Contact"});
-    // next();
-});
-*/
+
 router.post("/", function (req, res, next) {
 
     var _msgErrors = [];
