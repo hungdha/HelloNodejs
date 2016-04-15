@@ -1,0 +1,19 @@
+extends ../layout
+block customcss
+	link( rel='stylesheet', href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css")
+	link( rel='stylesheet', href='#{baseUrl}/stylesheets/client/restaurent.css')
+block customjs
+	script(src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js")
+	script(src="#{baseUrl}/javascripts/bootstrap/bootstrap-notify.js")
+	script(src="#{baseUrl}/javascripts/jquery/pages/restaurent.js")
+block content	
+	.container
+		h2 Restaurents
+		hr
+	.container
+		|<div id="example_toolbar" style="margin-top: 5px;margin-bottom: 7px;">
+		|  <button class="btn btn-success btn-space">Add New</button>
+		|  <button class="btn btn-danger btn-space">Trash</button>
+		|  <button class="btn btn-primary btn-space">Bulk Edit</button>
+		|</div>		
+		table#example.display(cellspacing='0', width='100%')		

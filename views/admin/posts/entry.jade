@@ -1,0 +1,25 @@
+extends ../layout
+block content
+	h2 Add New Post
+	form(action="#{baseUrl}/admin/posts/entry", method="POST", name="postEntryForm")        		
+		.form-group
+			label(for='post_title') Title:
+			input#post_title.form-control(type='post_title', name='post_title', placeholder='Enter title here')
+		.form-group
+			label(for='post_excerpt') Excerpt:			
+			textarea#post_excerpt.form-control(name='post_excerpt', rows="5", placeholder="Enter excerpt here")
+			p.help-block Example block-level help text here.
+		.form-group
+			label(for='post_content') Content:
+			//textarea#post_content.form-control(name='post_content', rows="15", placeholder="Enter content here" )
+			textarea#post_content.form-control(name='post_content', rows="15", placeholder="Enter content here" )
+			br				
+			input(type="file", name="post_fileupload", value="insert file")		
+
+		.checkbox
+			label
+				input(type='checkbox', name="comment_status", value="open")
+				| Allow Comments
+		.form-group
+			button.btn.btn-primary(type='submit') Publish
+			button.btn.btn-default(type='submit') Save Draft

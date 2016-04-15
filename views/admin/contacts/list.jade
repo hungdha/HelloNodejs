@@ -1,0 +1,35 @@
+extends ../layout
+block customjs
+	script(src="http://localhost:3000/javascripts/angular/controllers/ContactController.js")
+block content	
+	table.table.table-striped
+		thead
+			tr
+				th #
+				th First Name
+				th Last Name
+				th Username
+		tbody
+			tr
+				th(scope='row') 1
+				td Mark
+				td Otto
+				td @mdo
+			tr
+				th(scope='row') 2
+				td Jacob
+				td Thornton
+				td @fat
+			tr
+				th(scope='row') 3
+				td Larry
+				td the Bird
+				td @twitter
+			tr
+				th(scope='row') 4
+				td Larry
+				td the Bird
+				td @twitter
+
+
+

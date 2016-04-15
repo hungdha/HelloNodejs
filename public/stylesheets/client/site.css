@@ -1,0 +1,36 @@
+body {
+    
+    padding-top: 50px;    
+}
+#intro{
+    margin-bottom:50px;
+}
+
+.form-control, .btn { border-radius: 0; }
+a {
+  color: #00B7FF;
+}
+.page-wrapper{
+    /*min-height: 100%;
+    position: relative;
+    padding-bottom: 130px;*/
+}
+#footer {
+    position: static;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #222;
+    color: #FFF;
+    height: 200px;
+}
+.copyright-text{
+    text-align: center;
+    color:#FFFFFF;
+}
+@media (min-width: 768px){
+    .navbar-nav.navbar-right:last-child
+    {
+     margin-right:0;
+ }
+}

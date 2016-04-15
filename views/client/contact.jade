@@ -1,0 +1,55 @@
+extends layout
+block customjs
+    script(src="#{baseurl}/javascripts/angular/controllers/ContactController.js")
+    script(src="#{baseurl}/javascripts/jquery/pages/contact.js")
+block content    
+    .container
+        h2 Contact Us
+    hr
+    .container(ng-controller="ContactController")
+        .row            
+            .col-md-6
+                form.form-horizontal(action='', method='POST',  name="contactForm", ng-model="contactForm" )
+                    // hien thi cac loi tai day.                                 
+                    ul(style = "color:red", ng-show="isShow", ng-class="msgClass" )
+                        li(ng-repeat="msg in msgs") {{msg}} 
+                    div.form-group(ng-class="classForName")
+                        label.col-sm-2.control-label(for='name') Name:
+                            span.warning-start (*)
+                        .col-sm-10
+                            input#name.form-control(type='text', placeholder='Name', name="name", value=body.name, ng-model="name", ng-change="onChanged()" )                     
+
+                    div.form-group(ng-class="classForEmail")
+                        label.col-sm-2.control-label(for='email') Email:
+                            span.warning-start (*)
+                        .col-sm-10
+                            input#email.form-control(type='text', placeholder='Email', name="email", value=body.email, ng-model="email",  ng-change="onChanged()" )                                                  
+                    div.form-group(ng-class="classForPhone")
+                        label.col-sm-2.control-label(for='phone') Phone:
+                            span.warning-start (*)
+                        .col-sm-10
+                            input#phone.form-control(type='text', placeholder='Phone', name="phone", value=body.phone, ng-model="phone" )                        
+                    div.form-group(ng-class="classForAddress")
+                        label.col-sm-2.control-label(for='address') Address:
+                            span.warning-start (*)
+                        .col-sm-10
+                            input#address.form-control(type='text', placeholder='Address', name="address", value=body.address, ng-model="address")                    
+                    div.form-group(ng-class="classForMessage")
+                        label.col-sm-2.control-label(for='message') Message:
+                            span.warning-start (*)
+                        .col-sm-10
+                            textarea#message.form-control(placeholder='Message',rows= 10, name="message", ng-model="message" )=body.message
+
+                    div.form-group
+                        .col-sm-offset-2.col-sm-10
+                            button.btn.btn-primary(type='button' , ng-click="submit()" ) Send a contact                                                                                                                                                               
+            .col-md-1.hidden-xs.hidden-sm
+                .line-vertical
+            .col-md-5
+                my1
+                div(my2)
+                div(class="my3")
+                div(my4)
+
+
+

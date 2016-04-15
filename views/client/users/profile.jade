@@ -1,0 +1,16 @@
+extends ../layout
+block content
+	.container
+		h2 Profile @#{user.username}
+	hr
+	.container
+		h2 Profile detail
+		ul(class="list-unstyled")			
+			li ID: #{user.id}
+			li Username: #{user.username}	
+			li Firt Name: #{user.first_name}
+			li Last Name: #{user.last_name}
+			li Full Name : #{user.full_name}
+			li Reg Date: #{user.register_date}
+			li Level: #{user.level}		
+			li Role: #{user.role}

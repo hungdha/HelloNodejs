@@ -1,0 +1,18 @@
+extends ../layout
+block customcss
+	link( rel='stylesheet', href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css")
+	link( rel='stylesheet', href='#{baseUrl}/stylesheets/client/restaurent.css')
+block customjs
+	//script(src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js")
+	//script(src="#{baseUrl}/javascripts/jquery/pages/restaurent.js")
+block content	
+	.container
+		h2 Restaurents
+		hr
+	.container
+		|<form>
+		|	<div class="form-group">
+		|	    <label for="search">Email address</label>
+		|	    <input type="text" class="form-control" id="search" placeholder="Search restaurent.">
+		|	</div>
+		|</form>

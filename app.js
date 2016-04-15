@@ -11,7 +11,7 @@ var session = require("express-session");
 
 
 
-var app = express();
+var app = module.exports = express();
 
 // view engine setup
 
@@ -25,26 +25,40 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 1 * 24 * 60 * 60 * 1000 }, resave: true, saveUninitialized: true }));
-
+// 
 app.use('/scripts', express.static(__dirname + '/node_modules/angular/'));
 
+// tat ca request deu di qua func nay.
+app.use(function(req, res, next){
+    console.log("start...");    
+    res.locals.user = req.session.user || null;
 
-// HomePage  Controllers
-app.use('/', require("./controllers/homepage/index"));
-app.use('/about', require("./controllers/homepage/about"));
-app.use('/contact', require("./controllers/homepage/contact"));
+    // Permission Folder Admin
+    var path = req.originalUrl.split("/")[1];
+    if( path == "admin"){ 
 
-// User Controllers
-app.use('/user/login', require("./controllers/users/login"));
-app.use('/user/register', require("./controllers/users/register"));
-app.use('/user/logout', require("./controllers/users/logout"));
-app.use('/user/profile', require("./controllers/users/profile"));
-app.use('/user/edit', require("./controllers/users/edit"));
+        if( !req.session.user ){
+            req.session.admin_message_access = "Access denied - You are not authorized to access this page.";        
+            req.session.admin_return_url = req.originalUrl;
+            res.redirect("/user/login");
+        }
+        else if( req.session.user.level != 2 ){
+            res.redirect("/");   
+        }
+    }    
+    next();
+});
+
+
+
+// Register Routes
+require("./routes/routing").registerRoutes(app);
+
+
 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-
     var err = new Error('Not Found');   
     err.status = 404;
     err.title = "Error";    
@@ -52,12 +66,15 @@ app.use(function(req, res, next) {
 });
 
 
+
 // error handlers
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
+
+    app.use(function(err, req, res, next) {        
+        res.status( err.status || 500);
+        err.status = err.status || 500;           
         res.render('error', {
             message: err.message,
             error: err
@@ -68,12 +85,13 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+   
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        error: {}
+        error: err
     });
 });
 
-//console.log(app);
-module.exports = app;
+
+

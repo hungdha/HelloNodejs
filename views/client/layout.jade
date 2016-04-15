@@ -1,0 +1,104 @@
+- var baseUrl = URLs.baseUrl;
+doctype html
+html(ng-app="")
+    head
+        title= title
+        link( href="#{baseUrl}/stylesheets/bootstrap.min.css", rel="stylesheet" )
+        link( href="#{baseUrl}/javascripts/jquery/loading-bar/loadingbar.css")
+        link( rel='stylesheet', href='#{baseUrl}/stylesheets/style.css')       
+        link( href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", rel="stylesheet" type="text/css")
+        link( href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic', rel='stylesheet', type='text/css')
+        link( href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800', rel='stylesheet', type='text/css')
+        link( rel='stylesheet', href='#{baseUrl}/stylesheets/client/site.css')
+        block customcss
+    body
+        div.page-wrapper        
+            nav.navbar.navbar-inverse.navbar-fixed-top
+                .container
+                    // Brand and toggle get grouped for better mobile display
+                    .navbar-header
+                        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+                            span.sr-only Toggle navigation
+                            span.icon-bar
+                            span.icon-bar
+                            span.icon-bar
+                        a.navbar-brand(href='#{baseUrl}')
+                            b Hello Nodejs
+                    // Collect the nav links, forms, and other content for toggling
+                    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                        ul.nav.navbar-nav
+                            li
+                                a(href='#{baseUrl}/#home', class="navigation" ) Home                                    
+                                    span.sr-only (current)
+                            li
+                                a(href='#{baseUrl}/#about', class="navigation" ) About
+                            li
+                                a(href='#{baseUrl}/#contact', class="navigation" ) Contact
+                            li
+                                a(href='#{baseUrl}/posts', class="post") News
+                            li
+                                a(href='#{baseUrl}/restaurents', class="post") Restaurents
+                            li
+                                a(href='#{baseUrl}/restaurents2', class="post") Restaurents2
+                        form.navbar-form.navbar-left(role='search', action="#{baseUrl}/posts/search", method="GET" )
+                            .form-group
+                                input.form-control(type='text', placeholder='Search', name="keyword", value="#{keyword || ''}" )                                                
+                        -if(locals.user  != null  ){
+
+                            ul.nav.navbar-nav.navbar-right                            
+                                li                                                         
+                                    a Hello, #{locals.user.username}
+                                - if( locals.user.level == 2 ){
+                                    li.dropdown
+                                        a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                            | Pages Manager
+                                            span.caret
+                                        ul.dropdown-menu                                   
+                                            li
+                                                a(href='#{baseUrl}/admin/contacts') Manager Contacts
+                                            li
+                                                a(href='#{baseUrl}/admin/users') Manager Users                                    
+                                            li
+                                                a(href='#{baseUrl}/admin/posts') Manager Posts                                            
+                                            li.divider(role='separator')
+                                            li
+                                                a(href='#') Manager Tasks  
+                                - }
+
+                                li.dropdown
+                                    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                        | Profile
+                                        span.caret
+                                    ul.dropdown-menu
+                                        li
+                                            a(href='#') Change password
+                                        li
+                                            a(href='#{baseUrl}/user/edit') Edit profile
+                                        li
+                                            a(href='#{baseUrl}/user/profile/#{locals.user.username}') View Profile
+                                        li
+                                            a(href='#') Settings
+                                        li.divider(role='separator')                                        
+                                        li                                        
+                                            a(href='#{baseUrl}/user/logout') Logout 
+                        -}else{
+                            ul.nav.navbar-nav.navbar-right 
+                                li
+                                    button.btn.btn-default.navbar-btn(onclick="window.location.href='#{baseUrl}/user/login'", type='button') Sign In
+                                li
+                                    button.btn.btn-default.navbar-btn(onclick="window.location.href='#{baseUrl}/user/register'", type='button') Sign Up    
+                        -}                    
+            block content               
+            footer#footer
+                hr
+                .container
+                    p.text-center   Copyright &copy HungLeExpress                
+        block javascript
+            script(src="#{baseUrl}/javascripts/jquery/jquery.min.js")
+            script(src="#{baseUrl}/javascripts/jquery/loading-bar/jquery.loadingbar.min.js")                          
+            script(src="#{baseUrl}/javascripts/bootstrap/bootstrap.min.js")
+            //script(src="#{baseUrl}/javascripts/angular/angular.js")
+            //script(src="#{baseUrl}/javascripts/angular/main.js")
+            script(src="#{baseUrl}/javascripts/jquery.script.js")
+            //script(src="#{baseurl}/javascripts/angular/controllers/ContactController.js")            
+            block customjs    

@@ -1,0 +1,8 @@
+.line-vertical{
+	height: 500px;
+	width: 50%;
+	border-right: 1px solid #f3f3f3;
+}
+.warning-start{
+	color: red;
+}

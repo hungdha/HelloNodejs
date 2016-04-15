@@ -1,0 +1,22 @@
+extends ../layout
+block content
+	h2=title
+	p=message
+	form(action="#{baseUrl}/admin/posts/edit/" + post.ID , method="POST", name="postEditForm")
+		.form-group
+			label(for='post_title') Title:
+			input#post_title.form-control(type='post_title', placeholder='Enter title here', value="#{post.post_title}")
+		.form-group
+			label(for='post_excerpt') Excerpt:			
+			textarea#post_excerpt.form-control(name='post_excerpt', rows="5", placeholder="Enter excerpt here", value="#{post.post_excerpt}")
+			p.help-block Example block-level help text here.
+		.form-group
+			label(for='post_content') Content:
+			textarea#post_content.form-control(name='post_content', rows="15", placeholder="Enter content here" ) #{post.post_content}		
+		.checkbox
+			label
+			input(type='checkbox')
+			| Allow Comments
+		.form-group
+			button.btn.btn-primary(type='submit') Publish
+			button.btn.btn-default(type='submit') Save Draft

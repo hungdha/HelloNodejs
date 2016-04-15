@@ -1,0 +1,63 @@
+extends ../layout
+block customcss
+	//link( rel='stylesheet', href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css")
+	link( rel='stylesheet', href='#{baseUrl}/stylesheets/client/restaurent.css')
+block customjs	
+	|<script src="//maps.googleapis.com/maps/api/js" >async defer</script>
+	|<script type="text/javascript">
+	|var $resAddressLat = #{restaurent.address.coord[0]};
+	|var $resAddressLng = #{restaurent.address.coord[1]};
+	|var $resName = "#{restaurent.name}";
+	|var map, maker;
+	|function initMap(){
+	|		
+	|	var myLatLng = {lat: $resAddressLat, lng: $resAddressLng };	
+	|	map = new google.maps.Map(document.getElementById('res_coord'),{			
+	|		zoom: 8,
+	|		center: myLatLng,
+	|		mapTypeId: google.maps.MapTypeId.ROAD
+	|	});
+	|	marker = new google.maps.Marker({
+	|	    position: myLatLng,
+	|	    map: map,
+	|	    title: $resName,
+	|		draggable:true
+	|	});
+	|	marker.addListener('click', function(event){
+	|		var infowindow = new google.maps.InfoWindow({
+	|	        content: 'Latitude: ' + event.latLng.lat() + '<br>Longitude:'+ event.latLng.lng()
+	|	    });
+	|	    infowindow.open(map,marker);
+	|		if (marker.getAnimation() !== null) {
+	|    		marker.setAnimation(null);
+	|  		} else {
+	|    		marker.setAnimation(google.maps.Animation.BOUNCE);
+	|  		}	
+	| 	});
+	|	google.maps.event.addListener(marker,'drag',function(event) {
+	|	    document.getElementById("latlng").innerText = 'Latitude: ' + event.latLng.lat() + ', Longitude:'+ event.latLng.lng();    
+	|	});
+	|	google.maps.event.addListener(marker,'dragend',function(event){	
+	|		//document.getElementById("latlng").innerText = 'Latitude: ' + event.latLng.lat() + ', Longitude:'+ event.latLng.lng();|	    
+	|	});
+	|} // end initMap	
+	|function toggleBounce() {	
+	|  if (marker.getAnimation() !== null) {
+	|    marker.setAnimation(null);
+	|  } else {
+	|    marker.setAnimation(google.maps.Animation.BOUNCE);
+	|  }
+	|}
+	|window.load = initMap();
+	|</script> 	
+block content		
+	.container-fluid
+		.row
+			#res_coord(style="width:100%; height: 500px;")
+	.container-fluid
+		h2 #{restaurent.name}
+		address Building #{restaurent.address.building}, #{restaurent.address.street} street, Zipcode: #{restaurent.address.zipcode}
+		p#latlng
+			
+			
+				

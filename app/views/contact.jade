@@ -1,0 +1,51 @@
+extends layout
+block content    
+    .container
+        h2 Contact Us
+    hr
+    .container
+        .row            
+            .col-md-6
+                form.form-horizontal(action='', method='POST',  name="contactForm")
+                    div.form-group
+                        label.col-sm-2.control-label(for='name') Name:
+                            span.warning-start (*)
+                        .col-sm-10
+                            input#name.form-control(type='text', placeholder='Name', name="name", value=body.name )                     
+
+                    div.form-group.has-error
+                        label.col-sm-2.control-label(for='email') Email:
+                            span.warning-start (*)
+                        .col-sm-10
+                            input#email.form-control(type='text', placeholder='Email', name="email" value=body.email )                      
+                            span(class="help-block") A block of help text that breaks onto a new line and may extend beyond one line.
+                    div.form-group
+                        label.col-sm-2.control-label(for='phone') Phone:
+                            span.warning-start (*)
+                        .col-sm-10
+                            input#phone.form-control(type='text', placeholder='Phone', name="phone" value=body.phone )                        
+
+                    div.form-group
+                        label.col-sm-2.control-label(for='address') Address:
+                            span.warning-start (*)
+                        .col-sm-10
+                            input#address.form-control(type='text', placeholder='Address', name="address" value=body.address)                    
+                    div.form-group
+                        label.col-sm-2.control-label(for='message') Content:
+                            span.warning-start (*)
+                        .col-sm-10
+                            textarea#message.form-control(placeholder='Message',rows= 10, name="message", )=body.message
+
+                    div.form-group
+                        .col-sm-offset-2.col-sm-10
+                            button.btn.btn-primary(type='submit') Send a contact
+                            // hien thi cac loi tai day.
+                            //if msgErrors !== undefined
+                            ul(style = "color:red")
+                                each val in msgErrors
+                                    li= val       
+            .col-md-1.hidden-xs.hidden-sm
+                .line-vertical
+            .col-md-5
+                | <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='24151640'></div>
+
